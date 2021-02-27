@@ -1,0 +1,27 @@
+.row {
+  height: 90vh;
+}
+
+.col {
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+img {
+  align-self: center;
+  height: 200px;
+  width: 200px;
+}
+form {
+  width: 50%;
+  .register-button {
+    margin-right: 5px;
+    width: 80px;
+  }
+
+  .btn-secondary {
+    width: 250px;
+  }
+}

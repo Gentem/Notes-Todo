@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row align-items-center">
+    <div class="col">
+      <img src="assets/images/logo/take-note-logo.png" />
+      <form [formGroup]="userForm">
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" class="form-control" formControlName="email" />
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            formControlName="password"
+          />
+        </div>
+        <div class="button-container">
+          <button
+            (click)="registerUser()"
+            class="btn btn-primary register-button"
+          >
+            Register
+          </button>
+          <a routerLink="/login"
+            ><button class="btn btn-secondary">
+              Existing User? Click Here
+            </button></a
+          >
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
