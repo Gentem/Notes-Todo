@@ -1,11 +1,7 @@
-.btn-success {
-  margin-right: 5px;
-}
-
 .container {
-  border: 1px solid #000;
-  border-radius: 5px;
   padding: 10px;
+  width: 60%;
+  height: 100vh;
 
   hr {
     width: 100%;
@@ -15,5 +11,9 @@
     width: 80px;
     height: 80px;
     margin-right: 20px;
+  }
+
+  .btn-success {
+    margin-right: 5px;
   }
 }

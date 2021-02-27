@@ -3,8 +3,14 @@ export interface Note {
   body: string;
   media: string;
   status: string;
-  created: Date;
-  edited: Date;
+  created: {
+    seconds: number;
+    nanoseconds: number;
+  };
+  edited: {
+    seconds: number;
+    nanoseconds: number;
+  };
   deleted: boolean;
   owner: string;
 }

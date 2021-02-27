@@ -1,4 +1,4 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { User } from '../shared/models/user.model';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {
@@ -13,10 +13,9 @@ import { Router } from '@angular/router';
 export class AuthenticationService {
   userData: any;
   constructor(
-    public afs: AngularFirestore,
+    public firestore: AngularFirestore,
     public afAuth: AngularFireAuth,
-    public router: Router,
-    public ngZone: NgZone
+    public router: Router
   ) {}
 
   SignUserIn(user: User) {
@@ -26,9 +25,7 @@ export class AuthenticationService {
         window.alert(error.message);
       })
       .then((result) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['home']);
-        });
+        this.router.navigate(['home']);
       });
   }
 
@@ -36,29 +33,24 @@ export class AuthenticationService {
     return this.afAuth
       .createUserWithEmailAndPassword(user.email, user.password)
       .then((result) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['todo-list']);
-        });
+        this.addUser(user);
+        this.router.navigate(['login']);
       })
       .catch((error) => {
         window.alert(error.message);
       });
   }
 
-  SetUserData(user) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `users/${user.uid}`
-    );
-    const userData: User = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      emailVerified: user.emailVerified,
-      password: user.password,
-    };
-    return userRef.set(userData, {
-      merge: true,
+  addUser(user: User) {
+    delete user.password;
+    return new Promise<any>((resolve, reject) => {
+      this.firestore
+        .collection('users')
+        .add(user)
+        .then(
+          (res) => {},
+          (err) => reject(err)
+        );
     });
   }
 }

@@ -15,17 +15,26 @@ export class TodoListComponent implements OnInit {
     body: 'test body',
     media: '',
     status: 'Todo',
-    created: new Date(),
-    edited: new Date(),
+    created: { seconds: 1, nanoseconds: 1 },
+    edited: { seconds: 1, nanoseconds: 1 },
     deleted: false,
     owner: 'Justinas Sinkuans',
   };
 
+  userNotes: Note[] = [];
+
   ngOnInit() {
-    this.listService.getUserNotes();
+    this.loadNotes();
   }
 
   addNote() {
     this.listService.addNote(this.mockData);
+  }
+
+  loadNotes() {
+    this.listService.loadNotes();
+    this.listService.notes.subscribe((notes: Note) => {
+      this.userNotes.push(notes);
+    });
   }
 }

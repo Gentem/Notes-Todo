@@ -4,6 +4,7 @@ import { TodoListComponent } from './views/todo-list/todo-list.component';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { TodoItemComponent } from './views/todo-item/todo-item/todo-item.component';
 
 @NgModule({
   imports: [
@@ -11,6 +12,6 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
   ],
-  declarations: [TodoListComponent],
+  declarations: [TodoItemComponent, TodoListComponent],
 })
 export class TodoListModule {}

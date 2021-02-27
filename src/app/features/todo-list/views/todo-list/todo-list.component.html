@@ -1,21 +1,20 @@
-<div class="container mt-2">
+<div class="container">
   <div class="row">
     <div class="col mt-1">
       <img src="assets/images/logo/take-note-logo.png" alt="" srcset="" />
-      <button
-        (click)="addNote()"
-        routerLinkActive="router-link-active"
-        class="btn btn-success"
-      >
-        Add Note
-      </button>
+      <button (click)="addNote()" class="btn btn-success">Add Note</button>
       <button class="btn btn-danger">Sign Out</button>
       <span></span>
       <hr />
-      <span class="text-danger"
+      <span *ngIf="!userNotes" class="text-danger"
         >You currently have no notes, you can begin by clicking the Add Notes
         button above.</span
       >
     </div>
   </div>
+  <app-todo-item
+    class="note"
+    *ngFor="let note of userNotes"
+    [userNote]="note"
+  ></app-todo-item>
 </div>

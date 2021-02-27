@@ -1,31 +1,48 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Subject } from 'rxjs';
 import { Note } from '../../models/note.mode';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ListService {
+  notes = new Subject();
+
   constructor(
     private firestore: AngularFirestore,
     public afAuth: AngularFireAuth
   ) {}
 
-  getUserNotes() {}
-
   addNote(data: Note) {
+    let userId: string;
     this.afAuth.user.subscribe((res) => {
-      console.log(res.uid);
+      userId = res.uid;
+      return new Promise<any>((resolve, reject) => {
+        this.firestore
+          .collection(userId)
+          .add(data)
+          .then(
+            (res) => {},
+            (err) => reject(err)
+          );
+      });
     });
-    return new Promise<any>((resolve, reject) => {
+  }
+
+  loadNotes() {
+    let userId: string;
+    this.afAuth.user.subscribe((res) => {
+      userId = res.uid;
       this.firestore
-        .collection('notes')
-        .add(data)
-        .then(
-          (res) => {},
-          (err) => reject(err)
-        );
+        .collection(userId)
+        .get()
+        .subscribe((res) => {
+          res.docs.forEach((doc) => {
+            this.notes.next(doc.data());
+          });
+        });
     });
   }
 }
