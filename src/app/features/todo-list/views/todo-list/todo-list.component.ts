@@ -14,7 +14,7 @@ export class TodoListComponent implements OnInit {
     title: 'test title',
     body: 'test body',
     media: '',
-    status: 'Todo',
+    status: 'todo',
     created: { seconds: 1, nanoseconds: 1 },
     edited: { seconds: 1, nanoseconds: 1 },
     deleted: false,

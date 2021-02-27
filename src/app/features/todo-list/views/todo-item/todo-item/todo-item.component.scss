@@ -1,4 +1,18 @@
 .card {
   margin-top: 10px;
   margin-bottom: 10px;
+
+  .card-header {
+    background: white;
+  }
+
+  .badge-success {
+    background: green;
+    color: #fff;
+  }
+
+  .badge-warning {
+    background: orange;
+    color: #000;
+  }
 }
