@@ -2,19 +2,26 @@
   <div class="row">
     <div class="col mt-1">
       <img src="assets/images/logo/take-note-logo.png" alt="" srcset="" />
-      <button (click)="addNote()" class="btn btn-success">Add Note</button>
-      <button class="btn btn-danger">Sign Out</button>
+      <button (click)="setDialogMode(true)" class="btn btn-success">
+        Add Note
+      </button>
+      <button class="btn btn-danger" (click)="logout()">Sign Out</button>
       <span></span>
       <hr />
-      <span *ngIf="!userNotes" class="text-danger"
+      <span *ngIf="!notes" class="text-danger"
         >You currently have no notes, you can begin by clicking the Add Notes
         button above.</span
       >
     </div>
   </div>
   <app-todo-item
-    class="note"
-    *ngFor="let note of userNotes"
+    *ngFor="let note of notes"
+    [user]="userId"
     [userNote]="note"
   ></app-todo-item>
 </div>
+<app-create-item
+  *ngIf="dialogFlag"
+  (closeFlag)="setDialogMode($event)"
+  (formData)="create($event)"
+></app-create-item>

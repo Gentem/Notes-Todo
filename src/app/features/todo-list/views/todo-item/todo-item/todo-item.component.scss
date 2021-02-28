@@ -4,6 +4,8 @@
 
   .card-header {
     background: white;
+    display: flex;
+    justify-content: space-between;
   }
 
   .badge-success {
@@ -14,5 +16,10 @@
   .badge-warning {
     background: orange;
     color: #000;
+  }
+
+  img {
+    width: 20px;
+    height: 20px;
   }
 }

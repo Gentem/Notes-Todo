@@ -1,22 +1,27 @@
 <div class="card text-center">
   <div class="card-header">
     <span
-      *ngIf="userNote.status === 'done'"
+      *ngIf="userNote.status === 'Done'"
       class="badge badge-pill badge-success float-start"
-      >Done</span
+      >{{ userNote.status }}</span
     >
     <span
       *ngIf="userNote.status === 'Todo'"
       class="badge badge-pill badge-warning float-start"
-      >Todo</span
+      >{{ userNote.status }}</span
     >{{ userNote.title }}
+    <img
+      (click)="deleteNote()"
+      class="float-right"
+      src="assets/images/logo/delete-icon.png"
+      alt=""
+    />
   </div>
   <div class="card-body">
     <h5 class="card-title"></h5>
     <p class="card-text">
       {{ userNote.body }}
     </p>
-    <a href="#" class="btn btn-warning float-end">Go somewhere</a>
   </div>
   <div class="text-muted">
     Created On: {{ userNote.created.seconds * 1000 | date: "yyyy/MM/dd" }}

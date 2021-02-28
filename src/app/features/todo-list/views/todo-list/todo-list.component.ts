@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Note } from '../../models/note.mode';
+import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
+import { Note } from '../../models/note.model';
 import { ListService } from '../../services/list-service/list.service';
 
 @Component({
@@ -8,33 +10,45 @@ import { ListService } from '../../services/list-service/list.service';
   styleUrls: ['./todo-list.component.scss'],
 })
 export class TodoListComponent implements OnInit {
-  constructor(public listService: ListService) {}
+  dialogFlag = false;
 
-  mockData: Note = {
-    title: 'test title',
-    body: 'test body',
-    media: '',
-    status: 'todo',
-    created: { seconds: 1, nanoseconds: 1 },
-    edited: { seconds: 1, nanoseconds: 1 },
-    deleted: false,
-    owner: 'Justinas Sinkuans',
-  };
+  notes: Note[];
+  userId: any;
 
-  userNotes: Note[] = [];
+  constructor(public listService: ListService, private router: Router) {}
 
-  ngOnInit() {
-    this.loadNotes();
-  }
-
-  addNote() {
-    this.listService.addNote(this.mockData);
-  }
-
-  loadNotes() {
-    this.listService.loadNotes();
-    this.listService.notes.subscribe((notes: Note) => {
-      this.userNotes.push(notes);
+  ngOnInit(): void {
+    this.listService.getUser();
+    this.listService.userId.subscribe((id) => {
+      this.userId = id;
+      this.listService.getNotes(id).subscribe((data) => {
+        this.notes = data.map((e) => {
+          return {
+            id: e.payload.doc.id,
+            ...e.payload.doc.data(),
+          } as Note;
+        });
+      });
     });
+  }
+
+  create(note: Note): void {
+    this.listService.createNote(note, this.userId);
+  }
+
+  update(note: Note): void {
+    this.listService.updateNote(note, this.userId);
+  }
+
+  delete(noteId: string): void {
+    this.listService.deleteNote(noteId, this.userId);
+  }
+
+  setDialogMode(flag: boolean): void {
+    this.dialogFlag = flag ? true : false;
+  }
+
+  logout(): void {
+    this.router.navigate(['/login']);
   }
 }
