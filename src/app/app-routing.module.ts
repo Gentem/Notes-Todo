@@ -5,7 +5,7 @@ import { RegisterComponent } from './core/register/register.component';
 import { TodoListComponent } from './features/todo-list/views/todo-list/todo-list.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: TodoListComponent },

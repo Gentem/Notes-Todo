@@ -1,0 +1,42 @@
+<div class="modal-container">
+  <div class="card">
+    <form [formGroup]="form">
+      <div class="card-title">
+        Note Details:
+        <img
+          (click)="dialog.setDialogFlag(false)"
+          src="assets/images/logo/close-icon.png"
+        />
+      </div>
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" class="form-control" formControlName="title" />
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea
+          class="form-control"
+          rows="5"
+          formControlName="body"
+        ></textarea>
+      </div>
+    </form>
+    <div class="button-container">
+      <button
+        type="button"
+        [disabled]="!form.valid"
+        (click)="save($event)"
+        class="btn btn-primary btn-sm"
+      >
+        Save
+      </button>
+      <button
+        (click)="dialog.setDialogFlag(false)"
+        type="button"
+        class="btn btn-secondary btn-sm"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

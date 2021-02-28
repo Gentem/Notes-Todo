@@ -1,0 +1,40 @@
+.card {
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  .card-header {
+    background: white;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .badge-success {
+    background: green;
+    color: #fff;
+    height: 20px;
+    width: 53px;
+  }
+
+  .badge-warning {
+    background: orange;
+    color: #000;
+    height: 20px;
+    width: 53px;
+  }
+
+  .icon-container {
+    img {
+      width: 30px;
+      height: 30px;
+      margin: 5px;
+    }
+
+    img:hover {
+      cursor: pointer;
+    }
+  }
+
+  .non-select {
+    user-select: none;
+  }
+}

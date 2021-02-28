@@ -18,6 +18,7 @@ export class RegisterComponent implements OnInit {
   generateForm(): FormGroup {
     return new FormGroup({
       email: new FormControl(''),
+      name: new FormControl(''),
       password: new FormControl(''),
     });
   }
