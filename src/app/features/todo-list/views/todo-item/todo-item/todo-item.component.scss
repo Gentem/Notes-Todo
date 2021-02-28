@@ -11,15 +11,26 @@
   .badge-success {
     background: green;
     color: #fff;
+    height: 20px;
+    width: 53px;
   }
 
   .badge-warning {
     background: orange;
     color: #000;
+    height: 20px;
+    width: 53px;
   }
 
-  img {
-    width: 20px;
-    height: 20px;
+  .icon-container {
+    img {
+      width: 30px;
+      height: 30px;
+      margin: 5px;
+    }
+
+    img:hover {
+      cursor: pointer;
+    }
   }
 }

@@ -2,9 +2,7 @@
   <div class="row">
     <div class="col mt-1">
       <img src="assets/images/logo/take-note-logo.png" alt="" srcset="" />
-      <button (click)="setDialogMode(true)" class="btn btn-success">
-        Add Note
-      </button>
+      <button (click)="setToCreate()" class="btn btn-success">Add Note</button>
       <button class="btn btn-danger" (click)="logout()">Sign Out</button>
       <span></span>
       <hr />
@@ -16,12 +14,8 @@
   </div>
   <app-todo-item
     *ngFor="let note of notes"
+    (data)="save($event)"
     [user]="userId"
     [userNote]="note"
   ></app-todo-item>
 </div>
-<app-create-item
-  *ngIf="dialogFlag"
-  (closeFlag)="setDialogMode($event)"
-  (formData)="create($event)"
-></app-create-item>

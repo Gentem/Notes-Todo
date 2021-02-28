@@ -38,7 +38,8 @@ export class ListService {
   }
 
   updateNote(note: Note, uid: string): void {
-    this.firestore.doc(uid + '/').update(note);
+    console.log(note);
+    this.firestore.doc(uid + '/' + note.id).update(note);
   }
 
   deleteNote(noteId: string, uid: string): void {

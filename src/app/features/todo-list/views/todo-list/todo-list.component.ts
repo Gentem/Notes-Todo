@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
 import { Note } from '../../models/note.model';
+import { DialogService } from '../../services/dialog/dialog.service';
 import { ListService } from '../../services/list-service/list.service';
 
 @Component({
@@ -10,12 +11,14 @@ import { ListService } from '../../services/list-service/list.service';
   styleUrls: ['./todo-list.component.scss'],
 })
 export class TodoListComponent implements OnInit {
-  dialogFlag = false;
-
   notes: Note[];
   userId: any;
 
-  constructor(public listService: ListService, private router: Router) {}
+  constructor(
+    public listService: ListService,
+    private router: Router,
+    public dialog: DialogService
+  ) {}
 
   ngOnInit(): void {
     this.listService.getUser();
@@ -32,6 +35,14 @@ export class TodoListComponent implements OnInit {
     });
   }
 
+  save(note: Note): void {
+    if (this.dialog.dialogMode === 'edit') {
+      this.update(note);
+    } else {
+      this.create(note);
+    }
+  }
+
   create(note: Note): void {
     this.listService.createNote(note, this.userId);
   }
@@ -44,8 +55,9 @@ export class TodoListComponent implements OnInit {
     this.listService.deleteNote(noteId, this.userId);
   }
 
-  setDialogMode(flag: boolean): void {
-    this.dialogFlag = flag ? true : false;
+  setToCreate() {
+    this.dialog.setDialogFlag(true);
+    this.dialog.setDialogMode('create');
   }
 
   logout(): void {

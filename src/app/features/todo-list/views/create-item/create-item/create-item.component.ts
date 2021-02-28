@@ -1,5 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
+import { DialogService } from '../../../services/dialog/dialog.service';
+import { ListService } from '../../../services/list-service/list.service';
 
 @Component({
   selector: 'app-create-item',
@@ -9,12 +11,15 @@ import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
 export class CreateItemComponent implements OnInit {
   @Output() closeFlag = new EventEmitter<boolean>();
   @Output() formData = new EventEmitter<any>();
+  @Input() dialogMode: string;
+  @Input() note: any;
 
   form: FormGroup;
 
-  constructor() {}
+  constructor(public listService: ListService, public dialog: DialogService) {}
 
   ngOnInit(): void {
+    console.log('sdsd');
     this.generateForm();
   }
 
@@ -29,15 +34,15 @@ export class CreateItemComponent implements OnInit {
       deleted: new FormControl(false),
       owner: new FormControl(''),
     });
+
+    if (this.dialog.dialogMode === 'edit') {
+      this.form.patchValue(this.dialog.data);
+    }
   }
 
   save(e: Event): void {
     e.preventDefault();
     this.formData.emit(this.form.getRawValue());
-    this.close();
-  }
-
-  close(): void {
-    this.closeFlag.emit(false);
+    this.dialog.setDialogFlag(false);
   }
 }
