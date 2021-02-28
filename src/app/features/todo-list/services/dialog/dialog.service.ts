@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class DialogService {
-  dialogMode: string;
+  dialogMode = 'read';
   dialogFlag = false;
   data: any;
 

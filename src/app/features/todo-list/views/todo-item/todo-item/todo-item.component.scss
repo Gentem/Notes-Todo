@@ -33,4 +33,8 @@
       cursor: pointer;
     }
   }
+
+  .non-select {
+    user-select: none;
+  }
 }

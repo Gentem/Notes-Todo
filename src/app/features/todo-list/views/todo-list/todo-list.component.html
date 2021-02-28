@@ -2,9 +2,28 @@
   <div class="row">
     <div class="col mt-1">
       <img src="assets/images/logo/take-note-logo.png" alt="" srcset="" />
-      <button (click)="setToCreate()" class="btn btn-success">Add Note</button>
+      <button (click)="openCreate()" class="btn btn-success">Add Note</button>
       <button class="btn btn-danger" (click)="logout()">Sign Out</button>
-      <span></span>
+      <div>
+        You add todo item using the "Add Note" button. You can also Sign out as
+        the current user by clicking "Sign Out".
+
+        <br /><br />
+
+        You can using the following features to add/edit/remove todos from the
+        list. You may edit the title and body fields at any time and then click
+        save to save the changes.
+
+        <br /><br />
+
+        To change a todo status you can click the green todo status symbol to
+        change to it done and vice versa.
+
+        <br /><br />
+
+        Clicking the red bin icon will delete the todo item, removing it from
+        the list.
+      </div>
       <hr />
       <span *ngIf="!notes" class="text-danger"
         >You currently have no notes, you can begin by clicking the Add Notes
@@ -19,3 +38,7 @@
     [userNote]="note"
   ></app-todo-item>
 </div>
+<app-create-item
+  *ngIf="dialog.dialogFlag"
+  (formData)="create($event)"
+></app-create-item>

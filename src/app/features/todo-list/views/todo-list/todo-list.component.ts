@@ -55,12 +55,11 @@ export class TodoListComponent implements OnInit {
     this.listService.deleteNote(noteId, this.userId);
   }
 
-  setToCreate() {
-    this.dialog.setDialogFlag(true);
-    this.dialog.setDialogMode('create');
-  }
-
   logout(): void {
     this.router.navigate(['/login']);
+  }
+
+  openCreate(): void {
+    this.dialog.setDialogFlag(true);
   }
 }

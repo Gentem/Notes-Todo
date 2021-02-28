@@ -27,18 +27,17 @@ export class ListService {
   }
 
   createNote(note: Note, uid: string): any {
+    note['owner'] = uid;
     return this.firestore
       .collection(uid)
       .add(note)
       .then((res) => {
         note['id'] = res.id;
-        note['owner'] = uid;
-        this.firestore.doc(uid + '/' + note.id).update(note);
+        this.updateNote(note, uid);
       });
   }
 
   updateNote(note: Note, uid: string): void {
-    console.log(note);
     this.firestore.doc(uid + '/' + note.id).update(note);
   }
 
