@@ -30,14 +30,16 @@ export class TodoItemComponent implements OnInit {
       media: new FormControl(''),
       status: new FormControl(''),
       edited: new FormControl(new Date()),
-      deleted: new FormControl(''),
+      deleted: new FormControl(false),
     });
     this.form.patchValue(this.userNote);
   }
 
   deleteNote(): void {
-    this.userNote['delete'] = true;
-    this.listService.deleteNote(this.userNote.id, this.user);
+    this.userNote['deleted'] = true;
+    this.form.patchValue({ deleted: true });
+    this.save();
+    // this.listService.deleteNote(this.userNote.id, this.user);
   }
 
   changeNoteStatus() {

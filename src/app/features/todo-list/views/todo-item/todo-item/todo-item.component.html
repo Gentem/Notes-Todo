@@ -1,4 +1,4 @@
-<div class="card text-center">
+<div class="card text-center" *ngIf="!this.userNote.deleted">
   <div class="card-header">
     <span
       *ngIf="userNote.status === 'Todo'"
