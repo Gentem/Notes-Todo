@@ -52,6 +52,7 @@ export class TodoItemComponent implements OnInit {
   }
 
   save(): void {
+    this.form.patchValue({ edited: new Date() });
     this.dialog.setDialogMode('edit');
     this.data.emit(Object.assign(this.userNote, this.form.getRawValue()));
   }
