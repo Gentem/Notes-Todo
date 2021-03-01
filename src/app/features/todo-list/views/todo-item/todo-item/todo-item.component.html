@@ -41,6 +41,11 @@
         ></textarea>
       </div>
     </div>
+    <img
+      *ngIf="userNote.media !== ''"
+      [src]="userNote.media"
+      class="img-thumbnail media-image"
+    />
   </form>
 
   <div class="text-muted">
