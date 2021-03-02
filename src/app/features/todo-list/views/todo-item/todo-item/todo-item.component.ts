@@ -42,7 +42,13 @@ export class TodoItemComponent implements OnInit {
     // this.listService.deleteNote(this.userNote.id, this.user);
   }
 
-  changeNoteStatus() {
+  undo(): void {
+    this.generateForm();
+    this.changeNoteStatus();
+    this.form.markAsPristine();
+  }
+
+  changeNoteStatus(): void {
     if (this.userNote.status === 'Todo') {
       this.userNote.status = 'Done';
       this.form.patchValue({ status: 'Done' });

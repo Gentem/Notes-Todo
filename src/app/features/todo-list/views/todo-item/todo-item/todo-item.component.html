@@ -4,12 +4,14 @@
       *ngIf="userNote.status === 'Todo'"
       (click)="changeNoteStatus()"
       class="badge badge-pill badge-success float-start non-select"
+      title="Click to change status to done"
       >Todo</span
     >
     <span
       *ngIf="userNote.status === 'Done'"
       (click)="changeNoteStatus()"
       class="badge badge-pill badge-warning float-start non-select"
+      title="Click to change status to todo"
       >Done</span
     >
     <div class="data-container">
@@ -26,12 +28,21 @@
         (click)="deleteNote()"
         class="float-right"
         src="assets/images/logo/delete-icon.png"
+        title="Click to delete the note"
       />
       <img
         *ngIf="form.dirty"
         (click)="save()"
         class="float-right"
         src="assets/images/logo/floppy-disk.png"
+        title="Click to save any changes"
+      />
+      <img
+        *ngIf="form.dirty"
+        (click)="undo()"
+        class="float-right"
+        src="assets/images/logo/undo.png"
+        title="Click to undo any changes"
       />
     </div>
   </div>
