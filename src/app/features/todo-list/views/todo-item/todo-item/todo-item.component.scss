@@ -34,7 +34,17 @@
     }
   }
 
+  input,
+  textarea {
+    margin: 5px;
+  }
+
+  textarea {
+    resize: none;
+  }
+
   .non-select {
     user-select: none;
+    align-self: center;
   }
 }

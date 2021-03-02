@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
 import { Note } from '../../models/note.model';
 import { DialogService } from '../../services/dialog/dialog.service';
 import { ListService } from '../../services/list-service/list.service';
@@ -21,6 +20,11 @@ export class TodoListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getNoteData();
+    console.log(this.notes);
+  }
+
+  getNoteData() {
     this.listService.getUser();
     this.listService.userId.subscribe((id) => {
       this.userId = id;

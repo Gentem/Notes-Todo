@@ -11,9 +11,8 @@ describe('TodoItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TodoItemComponent ]
-    })
-    .compileComponents();
+      declarations: [TodoItemComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
