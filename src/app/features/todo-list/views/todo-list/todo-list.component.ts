@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Note } from '../../models/note.model';
 import { DialogService } from '../../services/dialog/dialog.service';
@@ -9,7 +9,7 @@ import { ListService } from '../../services/list-service/list.service';
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss'],
 })
-export class TodoListComponent implements OnInit {
+export class TodoListComponent implements OnInit, AfterViewInit {
   notes: Note[];
   userId: any;
 
@@ -19,9 +19,10 @@ export class TodoListComponent implements OnInit {
     public dialog: DialogService
   ) {}
 
-  ngOnInit(): void {
-    this.getNoteData();
-    console.log(this.notes);
+  ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
+    // this.getNoteData();
   }
 
   getNoteData() {

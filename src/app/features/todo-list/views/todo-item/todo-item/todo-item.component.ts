@@ -1,10 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { merge } from 'rxjs';
-import { __extends } from 'tslib';
 import { Note } from '../../../models/note.model';
 import { DialogService } from '../../../services/dialog/dialog.service';
-import { ListService } from '../../../services/list-service/list.service';
 
 @Component({
   selector: 'app-todo-item',
@@ -17,7 +14,7 @@ export class TodoItemComponent implements OnInit {
   @Output() data = new EventEmitter<any>();
   form: FormGroup;
 
-  constructor(public listService: ListService, public dialog: DialogService) {}
+  constructor(public dialog: DialogService) {}
 
   ngOnInit(): void {
     this.generateForm();
@@ -39,7 +36,6 @@ export class TodoItemComponent implements OnInit {
     this.userNote['deleted'] = true;
     this.form.patchValue({ deleted: true });
     this.save();
-    // this.listService.deleteNote(this.userNote.id, this.user);
   }
 
   undo(): void {
