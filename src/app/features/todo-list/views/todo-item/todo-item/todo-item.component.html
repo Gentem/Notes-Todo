@@ -1,32 +1,48 @@
-<div class="card text-center">
+<div class="card text-center" *ngIf="!this.userNote.deleted">
   <div class="card-header">
     <span
       *ngIf="userNote.status === 'Todo'"
       (click)="changeNoteStatus()"
       class="badge badge-pill badge-success float-start non-select"
+      title="Click to change status to done"
       >Todo</span
     >
     <span
       *ngIf="userNote.status === 'Done'"
       (click)="changeNoteStatus()"
       class="badge badge-pill badge-warning float-start non-select"
+      title="Click to change status to todo"
       >Done</span
     >
+    <div class="data-container">
+      <div class="text-muted">
+        Created On: {{ userNote.created.seconds * 1000 | date: "yyyy/MM/dd" }}
+      </div>
+      <div class="text-muted">
+        Edited On: {{ userNote.edited.seconds * 1000 | date: "yyyy/MM/dd" }}
+      </div>
+    </div>
+
     <div class="icon-container">
-      <!-- <img
-        *ngIf="dialog.dialogMode !== 'edit'"
-        src="assets/images/logo/edit-icon.png"
-      /> -->
       <img
         (click)="deleteNote()"
         class="float-right"
         src="assets/images/logo/delete-icon.png"
+        title="Click to delete the note"
       />
       <img
         *ngIf="form.dirty"
         (click)="save()"
         class="float-right"
         src="assets/images/logo/floppy-disk.png"
+        title="Click to save any changes"
+      />
+      <img
+        *ngIf="form.dirty"
+        (click)="undo()"
+        class="float-right"
+        src="assets/images/logo/undo.png"
+        title="Click to undo any changes"
       />
     </div>
   </div>
@@ -41,12 +57,10 @@
         ></textarea>
       </div>
     </div>
+    <img
+      *ngIf="userNote.media !== ''"
+      [src]="userNote.media"
+      class="img-thumbnail media-image"
+    />
   </form>
-
-  <div class="text-muted">
-    Created On: {{ userNote.created.seconds * 1000 | date: "yyyy/MM/dd" }}
-  </div>
-  <div class="text-muted">
-    Edited On: {{ userNote.edited.seconds * 1000 | date: "yyyy/MM/dd" }}
-  </div>
 </div>

@@ -1,10 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { merge } from 'rxjs';
-import { __extends } from 'tslib';
 import { Note } from '../../../models/note.model';
 import { DialogService } from '../../../services/dialog/dialog.service';
-import { ListService } from '../../../services/list-service/list.service';
 
 @Component({
   selector: 'app-todo-item',
@@ -17,7 +14,7 @@ export class TodoItemComponent implements OnInit {
   @Output() data = new EventEmitter<any>();
   form: FormGroup;
 
-  constructor(public listService: ListService, public dialog: DialogService) {}
+  constructor(public dialog: DialogService) {}
 
   ngOnInit(): void {
     this.generateForm();
@@ -30,17 +27,24 @@ export class TodoItemComponent implements OnInit {
       media: new FormControl(''),
       status: new FormControl(''),
       edited: new FormControl(new Date()),
-      deleted: new FormControl(''),
+      deleted: new FormControl(false),
     });
     this.form.patchValue(this.userNote);
   }
 
   deleteNote(): void {
-    this.userNote['delete'] = true;
-    this.listService.deleteNote(this.userNote.id, this.user);
+    this.userNote['deleted'] = true;
+    this.form.patchValue({ deleted: true });
+    this.save();
   }
 
-  changeNoteStatus() {
+  undo(): void {
+    this.generateForm();
+    this.changeNoteStatus();
+    this.form.markAsPristine();
+  }
+
+  changeNoteStatus(): void {
     if (this.userNote.status === 'Todo') {
       this.userNote.status = 'Done';
       this.form.patchValue({ status: 'Done' });
@@ -52,6 +56,7 @@ export class TodoItemComponent implements OnInit {
   }
 
   save(): void {
+    this.form.patchValue({ edited: new Date() });
     this.dialog.setDialogMode('edit');
     this.data.emit(Object.assign(this.userNote, this.form.getRawValue()));
   }

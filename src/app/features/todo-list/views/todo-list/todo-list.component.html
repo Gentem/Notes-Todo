@@ -1,23 +1,34 @@
 <div class="container">
   <div class="row">
     <div class="col mt-1">
-      <img src="assets/images/logo/take-note-logo.png" alt="" srcset="" />
-      <button (click)="openCreate()" class="btn btn-success">Add Note</button>
-      <button class="btn btn-danger" (click)="logout()">Sign Out</button>
-      <div>
-        You add todo item using the "Add Note" button. You can also Sign out as
-        the current user by clicking "Sign Out".
+      <img src="assets/images/logo/take-note-logo.png" />
+      <button
+        (click)="openCreate()"
+        class="btn btn-success"
+        title="Click to add a new note"
+      >
+        Add Note
+      </button>
+      <button
+        class="btn btn-danger"
+        (click)="logout()"
+        title="Sign out and return to the login page"
+      >
+        Sign Out
+      </button>
+      <div class="instruction-text">
+        You add a note using the "Add Note" button.
 
         <br /><br />
 
         You can using the following features to add/edit/remove todos from the
         list. You may edit the title and body fields at any time and then click
-        save to save the changes.
+        the save icon.
 
         <br /><br />
 
-        To change a todo status you can click the green todo status symbol to
-        change to it done and vice versa.
+        To change the status you can click the status of the note to toggle
+        between todo and done statuses.
 
         <br /><br />
 

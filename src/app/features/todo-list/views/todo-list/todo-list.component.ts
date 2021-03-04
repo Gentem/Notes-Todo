@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
 import { Note } from '../../models/note.model';
 import { DialogService } from '../../services/dialog/dialog.service';
 import { ListService } from '../../services/list-service/list.service';
@@ -10,7 +9,7 @@ import { ListService } from '../../services/list-service/list.service';
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss'],
 })
-export class TodoListComponent implements OnInit {
+export class TodoListComponent implements OnInit, AfterViewInit {
   notes: Note[];
   userId: any;
 
@@ -20,7 +19,13 @@ export class TodoListComponent implements OnInit {
     public dialog: DialogService
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
+    // this.getNoteData();
+  }
+
+  getNoteData() {
     this.listService.getUser();
     this.listService.userId.subscribe((id) => {
       this.userId = id;

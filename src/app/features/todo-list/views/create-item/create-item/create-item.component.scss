@@ -16,9 +16,23 @@
     left: 50%;
     transform: translate(-50%, -50%);
 
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 500px;
+    }
+
     .card-title {
       display: flex;
       justify-content: space-between;
+      padding: 0;
+      margin: 0;
+      font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+      font-size: large;
     }
 
     textarea {
