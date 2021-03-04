@@ -5,6 +5,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Installation
 Make sure to download the project source code. Using the CLI, run `npm install` to install the correct libraries and dependencies. Then run `ng serve` or `npm start` to launch the app at `localhost:4200`.
 
+## Using the app
+When presented with the login page, go ahead and sign up as a new user, any valid email will work, does not have to be a real email for security purposes. Each user will be allocated a collection in Google Firebase where their notes will be stored. Create as many accounts or login as much as you please.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
