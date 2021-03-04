@@ -22,7 +22,7 @@ export class TodoListComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {}
 
   ngAfterViewInit(): void {
-    // this.getNoteData();
+    this.getNoteData();
   }
 
   getNoteData() {
